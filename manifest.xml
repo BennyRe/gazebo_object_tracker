@@ -12,6 +12,8 @@
   <depend package="gazebo"/>
   <depend package="ar_pose"/>
   <depend package="ar_track_alvar"/>
+  <depend package="visualization_msgs"/>
+  <depend package="tf"/>
 
 </package>
 
