@@ -74,6 +74,42 @@ class GazeboObjectTracker:
                                                        markers.header.stamp, 
                                                        name, 
                                                        _frame_id)
+                    
+                    ################################
+                    # publish rviz marker
+                    ################################
+                    rviz_marker = Marker()
+                    rviz_marker.header = markers.header
+                    rviz_marker.id = marker.id
+                    rviz_marker.pose = self.objs[name]
+                    rviz_marker.lifetime = rospy.Duration(1.0)
+                    rviz_marker.scale.x = 0.03
+                    rviz_marker.scale.y = 0.03
+                    rviz_marker.scale.z = 0.015
+                    rviz_marker.ns = "basic_shapes"
+                    rviz_marker.type = Marker.CUBE
+                    rviz_marker.action = Marker.ADD
+                    if rviz_marker.id == 1:
+                        # red
+                        rviz_marker.color.r = 1.0
+                        rviz_marker.color.g = 0.0
+                        rviz_marker.color.b = 0.0
+                        rviz_marker.color.a = 1.0
+                    elif rviz_marker.id == 2:
+                        # blue
+                        rviz_marker.color.r = 0.0
+                        rviz_marker.color.g = 0.0
+                        rviz_marker.color.b = 1.0
+                        rviz_marker.color.a = 1.0
+                    else:
+                        # green
+                        rviz_marker.color.r = 0.0
+                        rviz_marker.color.g = 1.0
+                        rviz_marker.color.b = 0.0
+                        rviz_marker.color.a = 1.0
+                        
+                    
+                    self._visualPub.publish(rviz_marker)
             
             self._pub.publish(markers)
             seq = seq + 1
