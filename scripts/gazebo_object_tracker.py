@@ -13,7 +13,7 @@ _pub_freq = 25.0
 
 """
 COCA-COLA-CAN-250ML Marker 1
-IKEA-CUP-SOLBRAEND-BLU Marker 2
+IKEA-CUP-SOLBRAEND-BLU Marker 5
 
 """
 
@@ -22,11 +22,11 @@ class GazeboObjectTracker:
         rospy.init_node('gazebo_object_tracker')
         
         self.objs = {}
-        self.objDict = {'COCA-COLA-CAN-250ML' : 1, 'IKEA-CUP-SOLBRAEND-BLUE' : 2}
+        self.objDict = {'COCA-COLA-CAN-250ML' : 1, 'IKEA-CUP-SOLBRAEND-BLUE' : 5}
         
         rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback)
         
-        self._pub = rospy.Publisher('ar_pose_marker', ARMarkers)
+        self._pub = rospy.Publisher('ar_pose_marker', AlvarMarkers)
         self._visualPub = rospy.Publisher('visualization_marker', Marker)
         self._tf_broadcaster = tf.TransformBroadcaster()
         
@@ -37,7 +37,7 @@ class GazeboObjectTracker:
         
         seq = 0
         while not rospy.is_shutdown():
-            markers = ARMarkers()
+            markers = AlvarMarkers()
             markers.header.stamp = rospy.get_rostime()
             markers.header.seq = seq
             markers.header.frame_id = _frame_id
@@ -48,7 +48,7 @@ class GazeboObjectTracker:
                     # publish AR marker
                     ################################
                     
-                    marker = ARMarker()
+                    marker = AlvarMarker()
                     marker.id = self.objDict[name]
                     marker.pose.pose = self.objs[name]
                     
