@@ -43,7 +43,9 @@ class GazeboObjectTracker:
             markers.header.frame_id = _frame_id
             
             for name in self.objs.keys():
-                if name in self.objDict.keys():
+                if name == 'COCA-COLA-CAN-250ML':
+                    self.objs[name].position.z += 0.08
+                if name in self.objDict.keys():                    
                     ################################
                     # publish AR marker
                     ################################
