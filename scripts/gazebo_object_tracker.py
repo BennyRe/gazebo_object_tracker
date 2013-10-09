@@ -12,8 +12,8 @@ _frame_id = "/base_link"
 _pub_freq = 25.0
 
 """
-COCA-COLA-CAN-250ML Marker 1
-IKEA-CUP-SOLBRAEND-BLU Marker 5
+COCA-COLA-CAN-250ML Marker 5
+IKEA-CUP-SOLBRAEND-BLU Marker 1
 
 """
 
@@ -22,7 +22,7 @@ class GazeboObjectTracker:
         rospy.init_node('gazebo_object_tracker')
         
         self.objs = {}
-        self.objDict = {'COCA-COLA-CAN-250ML' : 1, 'IKEA-CUP-SOLBRAEND-BLUE' : 5}
+        self.objDict = {'COCA-COLA-CAN-250ML' : 5, 'IKEA-CUP-SOLBRAEND-BLUE' : 1}
         
         rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback)
         
